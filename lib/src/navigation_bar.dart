@@ -118,13 +118,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
   }
 
   Widget _buildIcon(TitledNavigationBarItem item, Color color) {
-    return ColorFiltered(
-      colorFilter: ColorFilter.mode(
-        color,
-        BlendMode.color,
-      ),
-      child: item.icon,
-    );
+    return IconTheme(child: item.icon, data: IconThemeData(color: color));
   }
 
   Widget _buildItemWidget(TitledNavigationBarItem item, bool isSelected) {
