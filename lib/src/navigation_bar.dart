@@ -6,7 +6,6 @@ import 'navigation_bar_item.dart';
 
 // ignore: must_be_immutable
 class TitledBottomNavigationBar extends StatefulWidget {
-  final bool reverse;
   final Curve curve;
   final Color activeColor;
   final Color inactiveColor;
@@ -19,7 +18,6 @@ class TitledBottomNavigationBar extends StatefulWidget {
 
   TitledBottomNavigationBar({
     Key key,
-    this.reverse = false,
     this.curve = Curves.linear,
     @required this.onTap,
     @required this.items,
@@ -43,8 +41,6 @@ class TitledBottomNavigationBar extends StatefulWidget {
 class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
   static const double BAR_HEIGHT = 60;
   static const double INDICATOR_HEIGHT = 2;
-
-  bool get reverse => widget.reverse;
 
   Curve get curve => widget.curve;
 
@@ -121,14 +117,13 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
     setState(() {});
   }
 
-  Widget _buildIcon(TitledNavigationBarItem item) {
-    return item.icon;
-  }
-
-  Widget _buildText(TitledNavigationBarItem item) {
-    return DefaultTextStyle.merge(
-      child: item.title,
-      style: TextStyle(color: reverse ? activeColor : widget.inactiveColor),
+  Widget _buildIcon(TitledNavigationBarItem item, Color color) {
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(
+        color,
+        BlendMode.color,
+      ),
+      child: item.icon,
     );
   }
 
@@ -144,12 +139,18 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
             opacity: isSelected ? 0.0 : 1.0,
             duration: duration,
             curve: curve,
-            child: reverse ? _buildIcon(item) : _buildText(item),
+            child: _buildIcon(
+              item,
+              isSelected ? activeColor : widget.inactiveColor,
+            ),
           ),
           AnimatedAlign(
             duration: duration,
             alignment: isSelected ? Alignment.center : Alignment(0, 5.2),
-            child: reverse ? _buildText(item) : _buildIcon(item),
+            child: _buildIcon(
+              item,
+              isSelected ? activeColor : widget.inactiveColor,
+            ),
           ),
         ],
       ),
