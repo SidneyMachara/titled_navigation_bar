@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TitledNavigationBarItem {
-  final Widget title;
-  final IconData icon;
+  Widget title;
+  final Widget icon;
   final Color backgroundColor;
 
   TitledNavigationBarItem({
     @required this.icon,
-    @required this.title,
+    this.title,
     this.backgroundColor = Colors.white,
-  });
+  }) {
+    if (title == null) {
+      this.title = icon;
+    }
+  }
 }

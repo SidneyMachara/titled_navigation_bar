@@ -122,10 +122,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
   }
 
   Widget _buildIcon(TitledNavigationBarItem item) {
-    return Icon(
-      item.icon,
-      color: reverse ? widget.inactiveColor : activeColor,
-    );
+    return item.icon;
   }
 
   Widget _buildText(TitledNavigationBarItem item) {
