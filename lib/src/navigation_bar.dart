@@ -114,7 +114,8 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
     widget.currentIndex = index;
     widget.onTap(widget.currentIndex);
 
-    setState(() {});
+    /// commenting this out cause the scafold using this will most likey refresh everything inculding this widget
+    // setState(() {});
   }
 
   Widget _buildIcon(TitledNavigationBarItem item, Color color) {
@@ -138,14 +139,14 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
               isSelected ? activeColor : widget.inactiveColor,
             ),
           ),
-          AnimatedAlign(
-            duration: duration,
-            alignment: isSelected ? Alignment.center : Alignment(0, 5.2),
-            child: _buildIcon(
-              item,
-              isSelected ? activeColor : widget.inactiveColor,
-            ),
-          ),
+          // AnimatedAlign(
+          //   duration: duration,
+          //   alignment: isSelected ? Alignment.center : Alignment(0, 5.2),
+          //   child: _buildIcon(
+          //     item,
+          //     isSelected ? activeColor : widget.inactiveColor,
+          //   ),
+          // ),
         ],
       ),
     );
